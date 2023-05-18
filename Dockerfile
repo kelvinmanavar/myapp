@@ -27,7 +27,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Generate the Laravel application key
 RUN php artisan key:generate
-
+CMD ["php-fpm"]
 # Use the official Nginx image as the base image
 FROM nginx:latest
 
@@ -41,4 +41,4 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 
 # Start both PHP-FPM and Nginx
-CMD ["php-fpm"]
+CMD ["nginx"]
