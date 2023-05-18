@@ -15,13 +15,15 @@ RUN apt-get update \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
 # Copy the project files to the working directory in the container
-COPY . .
+COPY . /var/www/html
 
 # Set the correct file permissions
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage
 
-# Install composer and run the composer install command
-
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    && composer install --no-interaction --no-scripts --no-dev --prefer-dist
+RUN cp .env.example .env
 # Generate the Laravel application key
+RUN php artisan key:generate
 
