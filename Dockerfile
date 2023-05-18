@@ -1,6 +1,9 @@
 # Use the official PHP image as the base image
 FROM php:8.2-fpm
-
+COPY php-fpm/www.conf /usr/local/etc/php-fpm.d/www.conf
+# Install nginx
+RUN apt-get install -y nginx
+RUN nginx/nginx.conf /etc/nginx/conf.d/default.conf
 # Set the working directory in the container
 WORKDIR /var/www/html
 
