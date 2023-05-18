@@ -2,13 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout the source code from your Git repository
-                git 'https://github.com/kelvinmanavar/myapp.git'
-            }
-        }
-
         stage('Build') {
             steps {
                 // Install dependencies and build Laravel app
