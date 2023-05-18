@@ -24,7 +24,7 @@ RUN chown -R www-data:www-data /var/www/html \
 # Install composer and run the composer install command
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer install --no-interaction --no-scripts --no-dev --prefer-dist
-
+RUN cp .env.example .env
 # Generate the Laravel application key
 RUN php artisan key:generate
 
