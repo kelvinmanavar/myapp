@@ -27,4 +27,4 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Generate the Laravel application key
 RUN php artisan key:generate
-CMD ["php-fpm"]
+
