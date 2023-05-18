@@ -5,7 +5,9 @@ pipeline {
         stage('Build') {
             steps {
                 // Install dependencies and build Laravel app
+                sh 'curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer'
                 sh 'composer install --no-interaction --no-dev --prefer-dist'
+                sh 'cp .env.example .env'
                 sh 'php artisan key:generate'
             }
         }
