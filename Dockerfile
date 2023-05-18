@@ -1,7 +1,7 @@
 # Use the official PHP image as the base image
 FROM php:7.4-fpm
 # Install nginx
-RUN apt install nginx -y
+RUN apk add nginx
 RUN nginx/nginx.conf /etc/nginx/conf.d/default.conf
 # Set the working directory in the container
 WORKDIR /var/www/html
