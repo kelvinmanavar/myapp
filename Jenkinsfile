@@ -10,7 +10,7 @@ pipeline {
 
                // Run the Docker container with the new image
                 sh 'docker run -it -p 8000:80 -d my-laravel-app'
-                sh 'docker compose up'
+               
             }
         }
     }
