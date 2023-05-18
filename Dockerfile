@@ -1,5 +1,5 @@
 # Use the official PHP image as the base image
-FROM php:8.2-fpm
+FROM php:7.4-fpm
 # Install nginx
 RUN apt install nginx -y
 RUN nginx/nginx.conf /etc/nginx/conf.d/default.conf
