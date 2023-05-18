@@ -2,20 +2,8 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
-            steps {
-                // Install dependencies and build Laravel app
-                sh 'curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer'
-                sh 'composer install --no-interaction --no-dev --prefer-dist'
-                sh 'cp .env.example .env'
-                sh 'php artisan key:generate'
-            }
-        }
-
         stage('Deploy') {
             steps {
-                // Copy the Nginx configuration file
-                sh 'cp nginx.conf /etc/nginx/conf.d/default.conf'
 
                 // Build the Docker image
                 sh 'docker build -t my-laravel-app .'
