@@ -36,7 +36,7 @@ COPY . /var/www/html
 COPY /nginx/nginx.conf /etc/nginx/sites-available/default
 RUN cp .env.example .env
 # Install Composer globally
-
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install Laravel dependencies
 
