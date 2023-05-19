@@ -34,7 +34,7 @@ COPY . /var/www/html
 
 # Set up Nginx configuration
 COPY /nginx/nginx.conf /etc/nginx/sites-available/default
-
+RUN cp .env.example .env
 # Install Composer globally
 
 
