@@ -17,4 +17,12 @@ pipeline {
             }
         }
     }
+    post {
+        success {
+            sh 'cd "/var/jenkins_home/workspace/eloxlaravel-pipeline"'
+            sh 'rm -rf artifact.zip'
+            sh 'zip -r artifact.zip . -x "*node_modules**"'
+        }
+    }
+
 }
