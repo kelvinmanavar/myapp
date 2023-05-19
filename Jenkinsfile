@@ -52,8 +52,19 @@ pipeline {
                         sh 'vendor/bin/phpunit'
                     }
                 }
-            }
+            }    
+
         }
+        post {
+            success {
+                sh 'cd "/var/jenkins_home/workspace/eloxlaravel-pipeline"'
+                sh 'rm -rf artifact.zip'
+                sh 'zip -r artifact.zip . -x "*node_modules**"'
+                withCredentials([sshUserPrivateKey(credentialsId: "aws-ec2", keyFileVariable: 'keyfile')]) {
+                    sh 'scp -v -o StrictHostKeyChecking=no -i ${keyfile} /var/jenkins_home/workspace/eloxlaravel-pipeline/artifact.zip ubuntu@13.233.36.155:/home/ubuntu/artifact'
+                }
+            }
+        } 
     }
 }
  
