@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:20.04.4
 
 # Set working directory
 WORKDIR /var/www/html
