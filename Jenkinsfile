@@ -65,7 +65,7 @@ pipeline {
                 sh 'scp -v -o StrictHostKeyChecking=no -i ${keyfile} /var/jenkins_home/workspace/eloxlaravel-pipeline/artifact.zip ubuntu@13.233.36.155:/home/ubuntu/artifact'
             }     
             sshagent(credentials: ['aws-ec2']) {
-                sh 'ssh -o StrictHostKeyChecking=no ubuntu@13.233.36.155 "unzip /home/ubuntu/artifact/artifact.zip -d /home/ubuntu/"'
+                sh 'ssh -o StrictHostKeyChecking=no ubuntu@13.233.36.155 "unzip -o /home/ubuntu/artifact/artifact.zip -d /home/ubuntu/"'
                 sh 'ssh -o StrictHostKeyChecking=no ubuntu@13.233.36.155 "sudo mv /home/ubuntu/* /var/www/html"'
                 script {
                     try {
