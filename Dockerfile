@@ -1,4 +1,4 @@
-FROM ubuntu:20.04.4
+FROM ubuntu:focal
 
 # Set working directory
 WORKDIR /var/www/html
