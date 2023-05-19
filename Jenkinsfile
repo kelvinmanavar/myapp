@@ -33,9 +33,32 @@ pipeline {
         }
         stage("Run Composer Install") {
             steps {
-                sh 'curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer'
                 sh 'composer install --no-interaction --no-ansi --no-scripts --no-progress'
             }
         }
+        stage('Build') {
+            steps {
+                // Build the Docker image
+                script {
+                    docker.build("my-laravel-app:${env.BUILD_ID}", "-f Dockerfile .")
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Run your Laravel application tests within the Docker container
+                script {
+                    docker.image("my-laravel-app:${env.BUILD_ID}")
+                        .inside('-w /var/www/html') {
+                        sh 'composer install --no-interaction --no-ansi --no-scripts --no-progress'
+                        sh 'php artisan key:generate'
+                        sh 'vendor/bin/phpunit'
+                    }
+                }
+            }
+        }
     }
-}    
+}
+ 
+     
