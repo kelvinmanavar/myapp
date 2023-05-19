@@ -31,11 +31,7 @@ pipeline {
                 }
             }
         }
-        stage("Run Composer Install") {
-            steps {
-                sh 'composer install --no-interaction --no-ansi --no-scripts --no-progress'
-            }
-        }
+
         stage('Build') {
             steps {
                 // Build the Docker image
