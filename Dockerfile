@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM ubuntu:latest
 
 # Set working directory
 WORKDIR /var/www/html
