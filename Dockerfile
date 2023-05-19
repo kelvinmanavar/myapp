@@ -13,6 +13,7 @@ RUN apt-get update && \
         apt-transport-https \
         software-properties-common \
         git \
+        zip \
         unzip \
         libonig-dev \
         libzip-dev \
