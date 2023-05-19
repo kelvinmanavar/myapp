@@ -54,5 +54,5 @@ RUN chown -R www-data:www-data storage bootstrap/cache
 EXPOSE 80
 
 # Start PHP-FPM and Nginx
-CMD nginx && php-fpm
+CMD [nginx && php-fpm]
 
