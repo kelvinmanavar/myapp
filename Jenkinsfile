@@ -33,6 +33,7 @@ pipeline {
         }
         stage("Run Composer Install") {
             steps {
+                sh 'curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer'
                 sh 'composer install --no-interaction --no-ansi --no-scripts --no-progress'
             }
         }
