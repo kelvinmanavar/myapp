@@ -19,11 +19,13 @@ RUN apt-get update && \
         libzip-dev \
         libpng-dev \
         libxml2-dev \
-        supervisor
+        supervisor 
+        
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd        
 
 # Install PHP 8.2
 
-RUN apt-get install -y php8.2-cli php8.2-mbstring php8.2-xml php8.2-zip php8.2-mysql php8.2-gd php8.2-curl php8.2-redis
+# apt-get install -y php8.2-cli php8.2-mbstring php8.2-xml php8.2-zip php8.2-mysql php8.2-gd php8.2-curl php8.2-redis
 
 
 # Copy Laravel application files
