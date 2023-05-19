@@ -54,5 +54,5 @@ RUN php artisan key:generate
 EXPOSE 80
 
 # Start PHP-FPM and Nginx
-CMD service php8.2-fpm start && service nginx start && tail -f /dev/null
+CMD service nginx start && php-fpm
 
