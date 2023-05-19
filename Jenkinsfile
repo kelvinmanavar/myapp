@@ -36,4 +36,5 @@ pipeline {
                 sh 'composer install --no-interaction --no-ansi --no-scripts --no-progress'
             }
         }
-}
+    }
+}    
