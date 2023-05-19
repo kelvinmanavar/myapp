@@ -39,16 +39,16 @@ COPY /nginx/nginx.conf /etc/nginx/sites-available/default
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install Laravel dependencies
-RUN composer install --no-interaction --optimize-autoloader --no-scripts
+
 
 # Set permissions for Laravel storage and bootstrap cache
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage
 
 RUN chown -R www-data:www-data storage bootstrap/cache
-RUN cp .env.example .env
+
 # Generate the Laravel application key
-RUN php artisan key:generate
+
 
 # Expose port 80
 EXPOSE 80
