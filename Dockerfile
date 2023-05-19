@@ -1,8 +1,8 @@
 # Use the official PHP image as the base image
-FROM php:7.4-fpm
+FROM php:8.2-fpm
 # Install nginx
-RUN apk add nginx
-RUN nginx/nginx.conf /etc/nginx/conf.d/default.conf
+RUN apt install nginx -y
+RUN /nginx/nginx.conf /etc/nginx/sites-available/default
 # Set the working directory in the container
 WORKDIR /var/www/html
 
@@ -28,4 +28,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN cp .env.example .env
 # Generate the Laravel application key
 RUN php artisan key:generate
+EXPOSE 80
+CMD service nginx start && php-fpm
 
