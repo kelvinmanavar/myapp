@@ -66,7 +66,7 @@ pipeline {
             }     
             sshagent(credentials: ['aws-ec2']) {
                 sh 'ssh -o StrictHostKeyChecking=no ubuntu@43.204.144.148 "unzip -o /home/ubuntu/artifact/artifact.zip -d /home/ubuntu"'
-                sh 'ssh -o StrictHostKeyChecking=no ubuntu@43.204.144.148 "sudo mv /home/ubuntu/*.* /var/www/html"'
+                sh 'ssh -o StrictHostKeyChecking=no ubuntu@43.204.144.148 "sudo mv /home/ubuntu/* /var/www/html"'
                 script {
                     try {
                         sh 'ssh -o StrictHostKeyChecking=no ubuntu@43.204.144.148 sudo chmod 777 /var/www/html/storage -R'
