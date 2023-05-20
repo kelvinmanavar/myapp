@@ -74,9 +74,6 @@ pipeline {
                     }
                 }
             }
-        }
-        always {
-            sh 'docker run -p 80:80 --name my-laravel-container -d my-laravel-app'
-        }        
+        } 
     } 
 }
