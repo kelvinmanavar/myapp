@@ -4,7 +4,8 @@ pipeline {
         stage('Delete previous workspace') {
             steps {
                 deleteDir()
-            }        
+            }
+        }
         stage("Verify tooling") {
             steps {
                 sh '''
