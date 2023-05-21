@@ -66,8 +66,8 @@ pipeline {
                 sh 'scp -v -o StrictHostKeyChecking=no -i ${keyfile} /var/jenkins_home/workspace/run_pipeline/artifact.zip ubuntu@3.110.40.84:/home/ubuntu/artifact'
             }     
             sshagent(credentials: ['aws-ec2']) {
-                sh 'ssh -o StrictHostKeyChecking=no ubuntu@3.110.40.84 "unzip -o /home/ubuntu/artifact/artifact.zip -d /home/ubuntu/artifact"'
-                sh 'ssh -o StrictHostKeyChecking=no ubuntu@3.110.40.84 "sudo mv /home/ubuntu/artifact/{*,.*}  /var/www/html"'
+                sh 'ssh -o StrictHostKeyChecking=no ubuntu@3.110.40.84 "unzip -o /home/ubuntu/artifact/artifact.zip -d /home/ubuntu"'
+                sh 'ssh -o StrictHostKeyChecking=no ubuntu@3.110.40.84 "sudo mv /home/ubuntu/{*,.*}  /var/www/html"'
                 script {
                     try {
                         sh 'ssh -o StrictHostKeyChecking=no ubuntu@3.110.40.84 sudo chmod 777 /var/www/html/storage -R'
