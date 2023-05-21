@@ -14,7 +14,7 @@ pipeline {
             steps {
                 sshagent(credentials: ['aws-ec2']) {
                     sh '''
-                        ssh -o StrictHostKeyChecking=no ubuntu@3.110.207.53 whoami
+                        ssh -o StrictHostKeyChecking=no ubuntu@3.110.40.84 whoami
                     '''
                 }
             }
@@ -63,14 +63,14 @@ pipeline {
             sh 'rm -rf artifact.zip'
             sh 'zip -r artifact.zip . -x "*node_modules**"'
             withCredentials([sshUserPrivateKey(credentialsId: "aws-ec2", keyFileVariable: 'keyfile')]) {
-                sh 'scp -v -o StrictHostKeyChecking=no -i ${keyfile} /var/jenkins_home/workspace/run_pipeline/artifact.zip ubuntu@3.110.207.53:/home/ubuntu/artifact'
+                sh 'scp -v -o StrictHostKeyChecking=no -i ${keyfile} /var/jenkins_home/workspace/run_pipeline/artifact.zip ubuntu@3.110.40.84:/home/ubuntu/artifact'
             }     
             sshagent(credentials: ['aws-ec2']) {
-                sh 'ssh -o StrictHostKeyChecking=no ubuntu@3.110.207.53 "unzip -o /home/ubuntu/artifact/artifact.zip -d /home/ubuntu/artifact"'
-                sh 'ssh -o StrictHostKeyChecking=no ubuntu@3.110.207.53 "sudo mv /home/ubuntu/artifact/{*,.*}  /var/www/html"'
+                sh 'ssh -o StrictHostKeyChecking=no ubuntu@3.110.40.84 "unzip -o /home/ubuntu/artifact/artifact.zip -d /home/ubuntu/artifact"'
+                sh 'ssh -o StrictHostKeyChecking=no ubuntu@3.110.40.84 "sudo mv /home/ubuntu/artifact/{*,.*}  /var/www/html"'
                 script {
                     try {
-                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@3.110.207.53 sudo chmod 777 /var/www/html/storage -R'
+                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@3.110.40.84 sudo chmod 777 /var/www/html/storage -R'
                     } catch (Exception e) {
                         echo 'Some file permissions could not be updated.'
                     }
