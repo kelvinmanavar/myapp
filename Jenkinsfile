@@ -40,19 +40,14 @@ pipeline {
                 }
             }
         }
-        stage("Populate .env file") {
-            steps {
-                dir("/var/jenkins_home/workspace/envs/demo-pipeline") {
-                    fileOperations([fileCopyOperation(excludes: '', flattenFiles: true, includes: '.env', targetLocation: "${WORKSPACE}")])
-                }
-            }
-        }  
+ 
         stage('Test') {
             steps {
                 // Run your Laravel application tests within the Docker container
                 script {
                     docker.image("my-laravel-app:${env.BUILD_ID}")
                         .inside('-w /var/www/html') {
+                        sh 'cp .env.example .env' 
                         sh 'composer install --no-interaction --no-ansi --no-scripts --no-progress'
                         sh 'php artisan key:generate'
                         sh 'vendor/bin/phpunit'
