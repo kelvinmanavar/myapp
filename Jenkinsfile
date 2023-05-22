@@ -69,6 +69,7 @@ pipeline {
             }     
             sshagent(credentials: ['aws-ec2']) {
                 sh 'ssh -o StrictHostKeyChecking=no ubuntu@13.233.152.85 "unzip -o /home/ubuntu/artifact/artifact.zip -d /home/ubuntu/artifact"'
+                sh 'ssh -o StrictHostKeyChecking=no ubuntu@13.233.152.85 'sudo service nginx stop''
                 sh 'ssh -o StrictHostKeyChecking=no ubuntu@13.233.152.85 "sudo mv /home/ubuntu/artifact/{*,.*}  /var/www/html"'
                 script {
                     try {
