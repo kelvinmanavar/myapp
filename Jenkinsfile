@@ -49,7 +49,7 @@ pipeline {
                     docker.image("my-lara-app:${env.BUILD_ID}")
                         .inside('-w /var/www/html') {
                         sh 'cp .env.example .env' 
-                        sh 'composer install --no-interaction --no-ansi --no-scripts --no-progress'
+                        sh 'composer install --no-interaction --optimize-autoloader --no-ansi --no-scripts --no-progress'
                         sh 'php artisan key:generate'
                         sh 'vendor/bin/phpunit'
                     }
