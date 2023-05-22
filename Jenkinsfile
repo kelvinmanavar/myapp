@@ -41,7 +41,7 @@ pipeline {
             steps {
                 // Build the Docker image
                 script {
-                    docker.build("my-laravel-app:${env.BUILD_ID}", "-f Dockerfile .")
+                    docker.build("my-lara-app:${env.BUILD_ID}", "-f Dockerfile .")
                 }
             }
         }
@@ -50,7 +50,7 @@ pipeline {
             steps {
                 // Run your Laravel application tests within the Docker container
                 script {
-                    docker.image("my-laravel-app:${env.BUILD_ID}")
+                    docker.image("my-lara-app:${env.BUILD_ID}")
                         .inside('-w /var/www/html') {
                         sh 'cp .env.example .env' 
                         sh 'composer install --no-interaction --no-ansi --no-scripts --no-progress'
