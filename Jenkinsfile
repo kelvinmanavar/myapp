@@ -51,6 +51,7 @@ pipeline {
                         sh 'cp .env.example .env' 
                         sh 'composer install --no-interaction --optimize-autoloader --no-ansi --no-scripts --no-progress'
                         sh 'php artisan key:generate'
+                        sh 'php artisan migrate'
                         sh 'composer dump-autoload --optimize'
                         sh 'vendor/bin/phpunit'
                     }
