@@ -33,7 +33,7 @@ COPY . /var/www/html
 
 # Set up Nginx configuration
 
-
+RUN cp .env.example .env
 # Install Composer globally
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
