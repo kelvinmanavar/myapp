@@ -27,7 +27,7 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 COPY composer.lock composer.json /var/www/html/
 # apt-get install -y php8.2-cli php8.2-mbstring php8.2-xml php8.2-zip php8.2-mysql php8.2-gd php8.2-curl php8.2-redis
 
-RUN php -d memory_limit=2048M /usr/local/bin/composer update
+RUN php -d memory_limit=-1 $(which composer) update
 # Copy Laravel application files
 COPY . /var/www/html
 
