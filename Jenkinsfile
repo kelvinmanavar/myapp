@@ -50,7 +50,7 @@ pipeline {
                         .inside('-w /var/www/html') {
                         sh 'cp .env.example .env' 
                         sh 'composer install --no-interaction --optimize-autoloader --no-ansi --no-scripts --no-progress'
-                        sh 'php -d memory_limit=-1 $(which composer) update'
+                        sh 'php -d memory_limit= 2048M  $(which composer) update'
                         sh 'php artisan key:generate'
                         sh 'composer dump-autoload --optimize'
                         sh 'vendor/bin/phpunit'
