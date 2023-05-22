@@ -24,7 +24,7 @@ RUN apt-get update && \
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd        
 
 # Install PHP 8.2
-COPY composer.lock composer.json /var/www/html/
+
 # apt-get install -y php8.2-cli php8.2-mbstring php8.2-xml php8.2-zip php8.2-mysql php8.2-gd php8.2-curl php8.2-redis
 
 
