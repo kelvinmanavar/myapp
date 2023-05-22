@@ -15,7 +15,7 @@ pipeline {
             steps {
                 sshagent(credentials: ['aws-ec2']) {
                     sh '''
-                        ssh -o StrictHostKeyChecking=no ubuntu@15.207.55.4 whoami
+                        ssh -o StrictHostKeyChecking=no ubuntu@13.233.152.85 whoami
                     '''
                 }
             }
@@ -60,18 +60,18 @@ pipeline {
     }    
     post {
         success {
-            sh 'cd "/var/jenkins_home/workspace/demo"'
+            sh 'cd "/var/jenkins_home/workspace/laravel"'
             sh 'rm -rf artifact.zip'
             sh 'zip -r artifact.zip . -x "*node_modules**"'
             withCredentials([sshUserPrivateKey(credentialsId: "aws-ec2", keyFileVariable: 'keyfile')]) {
-                sh 'scp -v -o StrictHostKeyChecking=no -i ${keyfile} /var/jenkins_home/workspace/demo/artifact.zip ubuntu@15.207.55.4:/home/ubuntu/artifact'
+                sh 'scp -v -o StrictHostKeyChecking=no -i ${keyfile} /var/jenkins_home/workspace/laravel/artifact.zip ubuntu@13.233.152.85:/home/ubuntu/artifact'
             }     
             sshagent(credentials: ['aws-ec2']) {
-                sh 'ssh -o StrictHostKeyChecking=no ubuntu@15.207.55.4 "unzip -o /home/ubuntu/artifact/artifact.zip -d /home/ubuntu/artifact"'
-                sh 'ssh -o StrictHostKeyChecking=no ubuntu@15.207.55.4 "sudo mv /home/ubuntu/artifact/{*,.*}  /var/www/html"'
+                sh 'ssh -o StrictHostKeyChecking=no ubuntu@13.233.152.85 "unzip -o /home/ubuntu/artifact/artifact.zip -d /home/ubuntu/artifact"'
+                sh 'ssh -o StrictHostKeyChecking=no ubuntu@13.233.152.85 "sudo mv /home/ubuntu/artifact/{*,.*}  /var/www/html"'
                 script {
                     try {
-                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@15.207.55.4 sudo chmod 777 /var/www/html/storage -R'
+                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@13.233.152.85 sudo chmod 777 /var/www/html/storage -R'
                     } catch (Exception e) {
                         echo 'Some file permissions could not be updated.'
                     }
