@@ -1,11 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Delete previous workspace') {
-            steps {
-                deleteDir()
-            }
-        }
+
         stage("Verify tooling") {
             steps {
                 sh '''
